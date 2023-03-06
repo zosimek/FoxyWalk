@@ -22,10 +22,12 @@ namespace Microsoft.Samples.Kinect.ColorBasics
     using Aspose.Imaging;
     using Aspose.Imaging.FileFormats.Gif;
     using Aspose.Imaging.FileFormats.Gif.Blocks;
+    using NReco.VideoConverter;
 
     using ScreenRecorderNameSpace;
     using System.Collections.Generic;
     using System.Linq;
+    using Accord.Video.FFMPEG;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -228,7 +230,8 @@ namespace Microsoft.Samples.Kinect.ColorBasics
             recording = false;
             fileCount = 1;
 
-            SaveVideo();
+            //SaveVideo();
+            SaveMovie();
 
         }
 
@@ -290,29 +293,33 @@ namespace Microsoft.Samples.Kinect.ColorBasics
 
         private void SaveVideo()
         {
-            //int width = 640;
-            //int height = 480;
-            //int frameRate = 30;
-            var imageCollection = new List<Aspose.Imaging.RasterImage>();
+            int width = 640;
+            int heigh = 480;
+            int frameRate = 30;
 
-            foreach(string imageLocation in inputImageSequence)
+            VideoFileWriter writer = new VideoFileWriter();
+
+            writer.Open("test.avi", width, heigh, frameRate, VideoCodec.MPEG4);
+
+            foreach (var image in inputImageSequence)
             {
-                Aspose.Imaging.RasterImage image = (Aspose.Imaging.RasterImage)Aspose.Imaging.Image.Load(imageLocation); imageCollection.Add(image);
-                imageCollection.Add(image);
+                Bitmap myBitmap = new Bitmap(image);
+                writer.WriteVideoFrame(myBitmap);
             }
+            writer.Close();
+        }
 
-            Aspose.Imaging.License licCreateGif = new Aspose.Imaging.License();
-            //licCreateGif.SetLicense("Aspose.Imaging.lic");
-
-
-            using (GifImage gifImage = new GifImage(new GifFrameBlock(imageCollection[0])))
-            {
-                for(var imageIndex = 1; imageIndex < imageCollection.Count; imageIndex++)
+        private void SaveMovie()
+        {
+            var videoConv = new FFMpegConverter();
+            videoConv.ConcatMedia(inputImageSequence.ToArray(), Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//Kinect//" + videoName, Format.gif,
+                new ConcatSettings()
                 {
-                    gifImage.AddPage(imageCollection[imageIndex]);
-                }
-                gifImage.Save(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//Kinect//" + videoName);
-            }
+                    VideoFrameRate = inputImageSequence.Count * 10000,
+                    VideoFrameSize = "640x480",
+                    VideoFrameCount= inputImageSequence.Count,
+                    ConcatAudioStream= false,
+                });
         }
     }
 }

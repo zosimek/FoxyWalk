@@ -56,3 +56,5 @@ C:\Users\zofdo\Ja\CZAS_WOLNY\Projekty_życia\Kinect\kinect_mine\FoxyWalk\bin\Deb
 C:\Users\zofdo\Ja\CZAS_WOLNY\Projekty_życia\Kinect\kinect_mine\FoxyWalk\bin\Debug\AForge.Video.dll
 C:\Users\zofdo\Ja\CZAS_WOLNY\Projekty_życia\Kinect\kinect_mine\FoxyWalk\bin\Debug\AForge.xml
 C:\Users\zofdo\Ja\CZAS_WOLNY\Projekty_życia\Kinect\kinect_mine\FoxyWalk\bin\Debug\AForge.Video.xml
+C:\Users\zofdo\Ja\CZAS_WOLNY\Projekty_życia\Kinect\kinect_mine\FoxyWalk\bin\Debug\NReco.VideoConverter.dll
+C:\Users\zofdo\Ja\CZAS_WOLNY\Projekty_życia\Kinect\kinect_mine\FoxyWalk\bin\Debug\NReco.VideoConverter.xml

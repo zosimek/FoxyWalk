@@ -25,6 +25,7 @@ namespace ScreenRecorderNameSpace
         private string audioName = "mic.wav";
         private string videoName = "video.mp4";
         private string finalName = "FinalVideo.mp4";
+        private string excelName = "Excel.xlsx";
 
 
         // Audio varible:
